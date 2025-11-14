@@ -1,4 +1,4 @@
 //Cmake tests go here
 
-#include "InvertedIndex.cpp"
+#include "Directorio.hpp"
 

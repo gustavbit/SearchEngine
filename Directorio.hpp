@@ -8,8 +8,6 @@ class Directorio{
     private:
         unordered_map<string, vector<InvertedIndex>> dir;
     public: 
-        Directorio(){
-            
-        }
+        Directorio(){}
 
 };
