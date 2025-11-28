@@ -10,6 +10,7 @@ using namespace std;
 
 class InvertedIndex{
     private: 
+        //This is a change
         string file;
         unordered_map<string, int> table;
 
