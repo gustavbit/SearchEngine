@@ -4,6 +4,8 @@
 #include <sys/stat.h>
 #include <iostream>
 #include <algorithm>
+#include <set>
+#include <vector>
 
 namespace fs = std::filesystem;
 
@@ -18,8 +20,8 @@ class Directorio{
 
         string getFileName(string path){ //returns file name from path
             string fileName = "";
-            reverse(path.begin(), path.end());
-            for(int i = 0; path[i] != '/'; ++i){
+            //reverse(path.begin(), path.end());
+            for(int i = path.length()-1; path[i] != '/' || path[i] == '\\'; --i){
                 fileName += path[i];
             }
             reverse(fileName.begin(), fileName.end());
@@ -38,15 +40,16 @@ class Directorio{
 
     public:
 
-        Directorio(string relPath){
-            string dirPath = "/home/gustav/SearchEngineLin/SearchEngine/" + relPath; //fix to get the path for current directory
+        Directorio(){}
+
+        void addDir(string inPath){ //Input is path to directory
             string word;
             string fileName;
             ifstream inFile;
 
             struct stat sb;
 
-            for(const auto& entry : fs::directory_iterator(dirPath)){
+            for(const auto& entry : fs::directory_iterator(inPath)){
                 fs::path outfilename = entry.path();
                 string outfilename_str = outfilename.string();
                 const char* path = outfilename_str.c_str();
@@ -74,6 +77,19 @@ class Directorio{
             return dir[s].getTable();
         }
 
-           
-
+        /*tuple<string, string, string> search(string t){ //idk man
+            vector<string> tokens;
+            vector<multiset<pair<string, int>>> associatedFiles;
+            string t;
+            for(char c : t){
+                if(c == ' ') {
+                    if(!t.empty()) tokens.push_back(t);
+                    t.clear(); 
+                }
+                else t += c;
+            }
+            for(string s : tokens){
+                //add set of words with token
+            }
+        }*/
 };
