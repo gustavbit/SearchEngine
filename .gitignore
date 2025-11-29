@@ -1,2 +1,8 @@
 moviesdb
 books_description_files
+CMakeFiles
+.vscode
+TestFolder
+example.txt
+CMakeFiles
+cmake_install.cmake
