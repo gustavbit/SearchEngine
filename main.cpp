@@ -3,7 +3,7 @@
 #include "Directorio.hpp"
 
 int main(){
-    Directorio D("books_description_files"); //takes about a minute to load all files in folder
+    Directorio D("books_description_files"); //takes about 6.5 seconds to load all files in folder
 
     unordered_map<string, int> m = D.getRelatedFiles("the");
 
