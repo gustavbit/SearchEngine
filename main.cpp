@@ -6,9 +6,9 @@
 int main(){
     Directorio D; //takes about 6.5 seconds to load all files in folder
    
-    D.addDir("");   // <- input full path to directory
+    D.addDir("/home/gustav/SearchEngineLin/SearchEngine/TestFolder");   // <- input full path to directory
 
-    unordered_map<string, int> m = D.getRelatedFiles(""); // <- input word
+    unordered_map<string, int> m = D.getRelatedFiles("the"); // <- input word
 
     multiset<pair<int, string>> s;
 
