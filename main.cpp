@@ -6,34 +6,36 @@
 int main(){
     Directorio D; //takes about 6.5 seconds to load all files in folder
    
-    D.addDir("/home/gustav/SearchEngineLin/SearchEngine/TestFolder");   // <- input full path to directory
+    D.addDir("/home/gustav/SearchEngineLin/SearchEngine/moviesdb");   // <- input full path to directory
 
-    unordered_map<string, int> m = D.getRelatedFiles("the"); // <- input word
+    D.search("");
 
-    multiset<pair<int, string>> s;
+    // unordered_map<string, int> m = D.getRelatedFiles("the"); // <- input word
 
-    for(pair<string, int> p : m){ //orders files in multiset
-        s.insert({p.second, p.first});
-    }
+    // multiset<pair<int, string>> s;
 
-    ofstream outFile("example.txt");
+    // for(pair<string, int> p : m){ //orders files in multiset
+    //     s.insert({p.second, p.first});
+    // }
 
-    auto msp = s.rbegin();
-    for(int i = 0; i < 3; ++i){ //takes last three files (subject to change depending on how many words are being searched at once)
-        if(msp == s.rend()){
-            cout << "found " << i << " file" << ((i == 1)? "" : "s") << endl;
-            break;
-        }
+    // ofstream outFile("example.txt");
+
+    // auto msp = s.rbegin();
+    // for(int i = 0; i < 3; ++i){ //takes last three files (subject to change depending on how many words are being searched at once)
+    //     if(msp == s.rend()){
+    //         cout << "found " << i << " file" << ((i == 1)? "" : "s") << endl;
+    //         break;
+    //     }
         
-        cout << msp->first << ' ' << msp->second << endl;
-        msp++;
-    }
+    //     cout << msp->first << ' ' << msp->second << endl;
+    //     msp++;
+    // }
 
     /*for(pair<int, string> p : s){
         outFile << p.first << ' ' << p.second << endl;
     }*/
 
-    outFile.close();
+    //outFile.close();
     
     return 0;
 }

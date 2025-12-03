@@ -15,18 +15,9 @@ class Directorio{
 
     private:
 
-        string relPath;
+        string Path;
         unordered_map<string, InvertedIndex> dir; //word -> list of related files
-
-        string getFileName(string path){ //returns file name from path
-            string fileName = "";
-            //reverse(path.begin(), path.end());
-            for(int i = path.length()-1; path[i] != '/' || path[i] == '\\'; --i){
-                fileName += path[i];
-            }
-            reverse(fileName.begin(), fileName.end());
-            return fileName;
-        }  
+        int fileAmount;
 
         string fixWord(string old){ //simple input validation (maybe fix in  constructor with getline)
             string fixed = "";
@@ -38,36 +29,62 @@ class Directorio{
             return fixed;
         }
 
+        vector<pair<string, int>> sortSearch(const unordered_map<string, int> &m){
+        
+            multiset<pair<int, string>> s;
+            vector<pair<string, int>> mostSearchedWords;
+
+            for(pair<string, int> p : m){ //orders files in multiset
+                s.insert({p.second, p.first});
+            }
+
+            auto msp = s.rbegin();
+            //takes last three files 
+            for(int i = 0; i < 3; ++i){ 
+                if(msp == s.rend()){
+                    cout << "found " << i << " file" << ((i == 1)? "" : "s") << endl;
+                    break;
+                }
+                mostSearchedWords.push_back({msp->second, msp->first});                
+                cout << msp->second << ' ' << msp->first << endl;
+                msp++;
+            }
+
+            return mostSearchedWords;
+
+        }
+
     public:
 
         Directorio(){}
 
         void addDir(string inPath){ //Input is path to directory
-            string word;
-            string fileName;
-            ifstream inFile;
 
-            struct stat sb;
+            //----------------------
 
+            int counter = 0;
+
+            //Iterates through all the files in directory
             for(const auto& entry : fs::directory_iterator(inPath)){
-                fs::path outfilename = entry.path();
-                string outfilename_str = outfilename.string();
-                const char* path = outfilename_str.c_str();
-
-                if(stat(path, &sb) == 0 && !(sb.st_mode &S_IFDIR)){ //checks if file isn't another subdirectory
-                    fileName = getFileName(path);
-                    inFile.open(path);
-
-                    while(inFile >> word){
+                if(entry.is_regular_file()){
+                    ifstream file(entry.path());
+                    if(!file.is_open()){
+                        std::cerr << "No se pudo abrir archivo: " << entry.path() << endl;
+                        continue;
+                    }
+                    ++counter;
+                    string word;
+                    while(file >> word){
                         word = fixWord(word);
                         if(dir.find(word) == dir.end()){
                             InvertedIndex I;
                             dir[word] = I;
+
                         }
-                        dir[word].addFile(fileName);
+                        dir[word].addFile(entry.path().filename().string());
                     }
 
-                    inFile.close();
+                    file.close();
                 }
             }
         }
@@ -77,19 +94,30 @@ class Directorio{
             return dir[s].getTable();
         }
 
-        /*tuple<string, string, string> search(string t){ //idk man
-            vector<string> tokens;
-            vector<multiset<pair<string, int>>> associatedFiles;
-            string t;
-            for(char c : t){
-                if(c == ' ') {
-                    if(!t.empty()) tokens.push_back(t);
-                    t.clear(); 
+        vector<pair<string, int>> search(string p){ //idk man
+            string palabra;
+            stringstream phrase(p);
+            phrase >> palabra;
+            palabra = fixWord(palabra);
+            unordered_map<string, int> freq = getRelatedFiles(palabra);
+
+            while(phrase >> palabra){
+                palabra = fixWord(palabra);
+                unordered_map<string, int> k = getRelatedFiles(palabra);
+
+                for(auto it = freq.begin(); it != freq.end(); ) {
+                    if (k.find(it->first) == k.end()) {
+                        it = freq.erase(it);  // returns next iterator
+                    } 
+                    else {
+                        it->second += k[it->first];
+                        ++it;
+                    }
+                    if (freq.empty()) return {};
                 }
-                else t += c;
+
             }
-            for(string s : tokens){
-                //add set of words with token
-            }
-        }*/
+
+            return sortSearch(freq);
+        }
 };
