@@ -19,7 +19,7 @@ class Directorio{
         unordered_map<string, InvertedIndex> dir; //word -> list of related files
         int fileAmount;
 
-        string fixWord(string old){ //simple input validation (maybe fix in  constructor with getline)
+        string fixWord(string old){ //simple input validation 
             string fixed = "";
             for(char c : old){
                 if(('A' <= c && 'Z' >= c)||('a' <= c && 'z' >= c)){
