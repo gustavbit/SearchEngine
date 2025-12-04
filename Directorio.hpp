@@ -15,7 +15,7 @@ class Directorio{
 
     private:
 
-        string Path;
+        string path;
         unordered_map<string, InvertedIndex> dir; //word -> list of related files
         int fileAmount;
 
@@ -56,11 +56,9 @@ class Directorio{
 
     public:
 
-        Directorio(){}
+        Directorio(string inPath){ //Input is path to directory
 
-        void addDir(string inPath){ //Input is path to directory
-
-            //----------------------
+            path = inPath;
 
             int counter = 0;
 

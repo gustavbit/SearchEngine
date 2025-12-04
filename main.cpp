@@ -4,9 +4,7 @@
 #include <set>
 
 int main(){
-    Directorio D; //takes about 6.5 seconds to load all files in folder
-   
-    D.addDir("/home/gustav/SearchEngineLin/SearchEngine/moviesdb");   // <- input full path to directory
+    Directorio D("/home/gustav/SearchEngineLin/SearchEngine/moviesdb");   // <- input full path to directory
 
     D.search("");
 
