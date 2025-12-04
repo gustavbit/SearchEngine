@@ -82,6 +82,8 @@ class Directorio{
                     file.close();
                 }
             }
+
+            fileAmount = counter;
         }
 
         unordered_map<string, int> getRelatedFiles(string s){

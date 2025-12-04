@@ -1,5 +1,3 @@
-//Cmake tests go here
-
 #include "Directorio.hpp"
 
 int main(){
