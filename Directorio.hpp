@@ -1,9 +1,6 @@
 #include "InvertedIndex.hpp"
-#include <fstream>
 #include <filesystem>
-#include <sys/stat.h>
 #include <iostream>
-#include <algorithm>
 #include <set>
 #include <vector>
 

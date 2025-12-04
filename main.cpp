@@ -1,12 +1,11 @@
 //Cmake tests go here
 
 #include "Directorio.hpp"
-#include <set>
 
 int main(){
-    Directorio D("/home/gustav/SearchEngineLin/SearchEngine/moviesdb");   // <- input full path to directory
+    Directorio D("/home/gustav/SearchEngineLin/SearchEngine/TestFolder");   // <- input full path to directory
 
-    D.search("");
+    D.search("The");
 
     // unordered_map<string, int> m = D.getRelatedFiles("the"); // <- input word
 
