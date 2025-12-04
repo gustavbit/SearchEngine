@@ -13,7 +13,9 @@ class InvertedIndex{
         unordered_map<string, int> table; //related file -> amount of that word in file
 
     public:
-        InvertedIndex() {}
+
+        /* BIG FIVES */
+        InvertedIndex() {} 
 
         ~InvertedIndex(){
             table.clear();
@@ -40,7 +42,7 @@ class InvertedIndex{
         }
 
         void addFile(string fileName){
-            table[fileName]++; //fix so that its ordered (maybe do two vectors and order based on file with most instances of word)
+            table[fileName]++; 
         }
 
         unordered_map<string, int> getTable(){return table;}
