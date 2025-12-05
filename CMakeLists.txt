@@ -3,4 +3,5 @@ project(MyProgram LANGUAGES CXX)
 
 set(CMAKE_BUILD_TYPE Debug CACHE STRING "Build type" FORCE)
 
-add_executable(main main.cpp)
+add_executable(main src/main.cpp)
+add_executable(test tests/TestCase.cpp)
