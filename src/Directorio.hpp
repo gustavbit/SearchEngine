@@ -40,15 +40,15 @@ class Directorio{
             - Cuando se colocan en multiset se guardan de menor a mayor
 
             2. Coloca iterador en ultimo file (el de mayor frecuencia) y 
-            recorre ultimos tres elementos del multiset para poder output
-            3 files mas relevantes
+            recorre ultimos tres elementos del multiset para poder guardar
+            3 files mas relevantes en un vector
 
-            Implementacion utilizando pares y sets
+            Implementacion utilizando sets
         */
-        vector<pair<string, int>> sortSearch(const unordered_map<string, int> &m){
+        vector<string> sortSearch(const unordered_map<string, int> &m){
         
             multiset<pair<int, string>> s;
-            vector<pair<string, int>> mostSearchedWords;
+            vector<string> mostSearchedWords;
 
             for(pair<string, int> p : m){ //ordena files en multiset
                 s.insert({p.second, p.first}); // par de {frecuencia, palabra}
@@ -58,11 +58,9 @@ class Directorio{
             //toma ultimos tres files 
             for(int i = 0; i < 3; ++i){ 
                 if(msp == s.rend()){
-                    cout << "found " << i << " file" << ((i == 1)? "" : "s") << endl;
                     break;
                 }
-                mostSearchedWords.push_back({msp->second, msp->first}); //guarda files más relevantes en vector             
-                cout << msp->second << ' ' << msp->first << endl; //imprime file
+                mostSearchedWords.push_back(msp->second); //guarda files más relevantes en vector             
                 msp++; //incrementa iterador
             }
 
@@ -91,9 +89,8 @@ class Directorio{
                     while(file >> word){
                         word = fixWord(word);
                         if(dir.find(word) == dir.end()){
-                            WordFrequency I;
-                            dir[word] = I;
-
+                            WordFrequency wf;
+                            dir[word] = wf;
                         }
                         dir[word].addFile(entry.path().filename().string());
                     }
@@ -119,13 +116,13 @@ class Directorio{
                 2.1. Si la palabra no se encuentra en los files de la plabra anterior, elimina el file,
                 sino va a sumar frecuencias
                 2.2 Si el mapa termina vacio va a devolver un vector vacio
-            3. Devuelve 3 files mas relevantes
+            3. Devuelve 3 files mas relevantes en un vector
 
             - Tambien funciona para busquedas de una sola palabra
 
             Implementacion utilizando unordered_map
         */
-        vector<pair<string, int>> search(string p){ 
+        vector<string> search(string p){ 
             string palabra;
             stringstream phrase(p);
             phrase >> palabra; // lee primera palabra

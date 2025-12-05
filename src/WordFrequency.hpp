@@ -10,7 +10,8 @@ using namespace std;
 
 class WordFrequency{
     private: 
-        unordered_map<string, int> table; //related file -> amount of that word in file
+        //File -> Cantidad de Palabra en File
+        unordered_map<string, int> table; 
 
     public:
 
@@ -41,10 +42,12 @@ class WordFrequency{
             rs.table.clear();
         }
 
+        //Adds file to word's frequency table
         void addFile(string fileName){
             table[fileName]++; 
         }
 
+        //Getter
         unordered_map<string, int> getTable(){return table;}
 
 };
