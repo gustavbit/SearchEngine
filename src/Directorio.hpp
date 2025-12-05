@@ -1,4 +1,4 @@
-#include "InvertedIndex.hpp"
+#include "WordFrequency.hpp"
 #include <filesystem>
 #include <iostream>
 #include <set>
@@ -13,7 +13,7 @@ class Directorio{
     private:
 
         string path;
-        unordered_map<string, InvertedIndex> dir; //word -> list of related files
+        unordered_map<string, WordFrequency> dir; //word -> list of related files
         int fileAmount;
 
         /*
@@ -91,7 +91,7 @@ class Directorio{
                     while(file >> word){
                         word = fixWord(word);
                         if(dir.find(word) == dir.end()){
-                            InvertedIndex I;
+                            WordFrequency I;
                             dir[word] = I;
 
                         }

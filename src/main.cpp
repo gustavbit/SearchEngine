@@ -1,9 +1,9 @@
 #include "Directorio.hpp"
 
 int main(){
-    Directorio D("/home/gustav/SearchEngineLin/SearchEngine/TestFolder");   // <- input full path to directory
+    Directorio D("");   // <- input full path to directory
 
-    D.search("The");
+    D.search("");
 
     // unordered_map<string, int> m = D.getRelatedFiles("the"); // <- input word
 

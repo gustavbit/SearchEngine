@@ -8,35 +8,35 @@ Class description here
 
 using namespace std;
 
-class InvertedIndex{
+class WordFrequency{
     private: 
         unordered_map<string, int> table; //related file -> amount of that word in file
 
     public:
 
         /* BIG FIVES */
-        InvertedIndex() {} 
+        WordFrequency() {} 
 
-        ~InvertedIndex(){
+        ~WordFrequency(){
             table.clear();
         }
 
-        InvertedIndex &operator=(const InvertedIndex& rs){
+        WordFrequency &operator=(const WordFrequency& rs){
             table = rs.table;
             return *this;
         }
 
-        InvertedIndex &operator=(InvertedIndex&& rs){
+        WordFrequency &operator=(WordFrequency&& rs){
             table = rs.table;
             rs.table.clear();
             return *this;
         }
 
-        InvertedIndex(const InvertedIndex &rs){
+        WordFrequency(const WordFrequency &rs){
             table = rs.table;
         }
 
-        InvertedIndex(InvertedIndex &&rs){
+        WordFrequency(WordFrequency &&rs){
             table = rs.table;
             rs.table.clear();
         }
